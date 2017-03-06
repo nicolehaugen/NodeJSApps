@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Babies</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <h1>My Baby List</h1>
+  <% for(var i=0; i < babyList.length; i++) { %>
+    <li> 
+    <a href=<%= "/baby/view/" + babyList[i].id %>>
+      <%= babyList[i].lastName %>, <%= babyList[i].firstName%> </a>
+    </li>
+      <% } %>
+    <br>
+ <form action="/baby" method="post">
+   <h1>Add a Baby</h1>
+    <div>
+      <label>First Name:</label>
+      <tab1 /><input type="text" name="firstName" />
+    </div>
+    <div>
+      <label>Last Name:</label>
+      <tab1 /><input type="text" name="lastName" />
+    </div>
+    <div>
+      <label>Birth Date:</label>
+      <tab1 /><input type="date" name="birthDate" />
+    </div>
+      <div>
+      <label>Remaining Units:</label>
+      <tab1 /><input type="number" name="remainingUnits" />
+    </div>
+     <div>
+      <label>Unit of Measure:</label>
+      <tab1 />
+      <input type="radio" name="unitOfMeasure" value="ounces" />Ounces
+      <input type="radio" name="unitOfMeasure" value="milliters" />Milliters
+    </div>
+    <div>
+      <input type="submit" value="Create" />
+    </div>
+  </form>
+
+  </body>
+</html>

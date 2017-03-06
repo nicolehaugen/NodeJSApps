@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Baby Details</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <h1><%= baby.lastName %>, <%= baby.firstName%></h1>
+  <div>
+    <label>Birth Date:</label>
+    <%= baby.birthDate %>
+  </div>
+  <div>
+      <label>Remaining Units:</label>
+      <%= baby.remainingUnits + " " + baby.unitOfMeasure %>
+  </div>
+  <% for(var i=0; i < baby.dailyLogs.length; i++) { %>
+    <li> 
+    <a href="">
+      <%= baby.dailyLogs[i].date %> </a>
+    </li>
+     <% } %>
+    <br>
+ <form method="POST" action=<%= "/baby/" + baby.id + "?_method=PUT"%> >
+   <h1>Add a Log</h1>
+     <div>
+      <label>Log Date:</label>
+      <input type="date" name="logDate" />
+    </div>
+    <div>
+      <input type="submit" value="Update test" />
+    </div>
+  </form>
+  </body>
+</html>

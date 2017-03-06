@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title><%= title %></title>
+    </head>
+    <body>
+    <center>
+    <h1>Baby Bytes - Login</h1>
+      <img src="images/babybyte.png" alt="Baby Bytes">
+      <br>
+      <% if ( userFullName ) { %>
+        <h2>Hello, <%=userFullName%> !</h2> 
+        <a href="/users/signout">Sign out</a>
+        <a href="/baby/view">View baby details</a>
+      <% } else { %>
+        <a href="/users/signup">Signup</a>
+        <a href="/users/signin">Signin</a>
+    <% } %>
+    </center>
+    </body>
+</html>
