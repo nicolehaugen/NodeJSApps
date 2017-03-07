@@ -6,10 +6,11 @@ moment = require('moment');
 
 var DailyLogSchema = new Schema({
     date: {
-        type: String,
+        type: Date,
         //max: [moment.get('date'), 'Daily log date is in future'],
         //min: [baby.modelSchema.birthDate, 'Daily log date is older than child'],
-        default: 'test date'
+        default: Date.now //,
+            //required: 'Log date is required'
     },
     totalUnitsConsumed: {
         type: Number,

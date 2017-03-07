@@ -8,15 +8,15 @@
   <h1><%= baby.lastName %>, <%= baby.firstName%></h1>
   <div>
     <label>Birth Date:</label>
-    <%= baby.birthDate %>
+    <b><%= baby.birthDate %></b>
   </div>
   <div>
-      <label>Remaining Units:</label>
-      <%= baby.remainingUnits + " " + baby.unitOfMeasure %>
+    <label>Remaining Units:</label>
+    <b><%= baby.remainingUnits + " " + baby.unitOfMeasure %></b>
   </div>
   <% for(var i=0; i < baby.dailyLogs.length; i++) { %>
     <li> 
-    <a href="">
+   <a href=<%= "/baby/view/" + baby.id + "/" + baby.dailyLogs[i].id %>>
       <%= baby.dailyLogs[i].date %> </a>
     </li>
      <% } %>
@@ -28,7 +28,7 @@
       <input type="date" name="logDate" />
     </div>
     <div>
-      <input type="submit" value="Update test" />
+      <input type="submit" value="Create" />
     </div>
   </form>
   </body>

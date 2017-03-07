@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Baby Log</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <h1><%= baby.lastName %>, <%= baby.firstName%></h1>
+  <div>
+    <label>Log Date:</label>
+    <b><%= log.date %></b>
+  </div>
+   <h1>Bottle Offers</h1>
+  <% for(var i=0; i < log.offers.length; i++) { %>
+    <li> 
+    <a href="">
+      <%= log.offers[i].time + ", " + log.offers[i].unitsConsumed + " " + baby.unitOfMeasure %> </a>
+    </li>
+     <% } %>
+    <br>
+     
+<!-- <form method="POST" action=<%= "/baby/" + baby.id + "?_method=PUT"%> >
+     <div>
+      <label>Log Date:</label>
+      <input type="date" name="logDate" />
+    </div>
+    <div>
+      <input type="submit" value="Create" />
+    </div>
+  </form>-->
+  </body>
+</html>

@@ -3,7 +3,8 @@ var mongoose = require('mongoose'),
     express = require('express'),
     moment = require('moment');
 
-exports.create = function(req, res, next) {
+//Returns json for created baby
+exports.createJson = function(req, res, next) {
     var baby = new babyModel(req.body);
     baby.parent = req.user;
 
@@ -19,10 +20,26 @@ exports.create = function(req, res, next) {
     });
 };
 
-//Finds baby by id and passes it on response so that it can be used further on down 
+//Redirects back to the previous view
+exports.createView = function(req, res, next) {
+    var baby = new babyModel(req.body);
+    baby.parent = req.user;
+
+    baby.save(function(err) {
+        if (err) {
+            return res.status(400).send({
+                message: getErrorMessage(err)
+            });
+        } else {
+            res.redirect("back");
+        }
+    });
+};
+
+//Finds baby by id and sets it on the response so that it can be used further down 
 //in callback chain, such as by an update or delete method
-exports.findById = function(req, res, next) {
-    var babyId = req.params.id;
+exports.findByIdRes = function(req, res, next) {
+    var babyId = req.params.babyid;
 
     babyModel.findById(babyId, function(err, baby) {
         if (err) {
@@ -36,45 +53,19 @@ exports.findById = function(req, res, next) {
     });
 };
 
+//These find methods either render the found baby as a view or simply return the json
 exports.findByIdJson = function(req, res) {
-    findById(req, res, false);
+    findBabyById(req, res, false);
 };
 
 exports.findByIdView = function(req, res) {
-    findById(req, res, true);
+    findBabyById(req, res, true);
 };
 
-findById = function(req, res, isRendered) {
-    var babyId = req.params.id;
+findBabyById = function(req, res, isRendered) {
+    var babyId = req.params.babyid;
 
-    babyModel.findById(babyId, function(err, baby, n) {
-        if (err) {
-            return res.status(400).send({
-                message: getErrorMessage(err)
-            });
-        } else {
-            if (isRendered) {
-                res.render('babydetailsview', { baby });
-            } else {
-                res.json(baby);
-            }
-        }
-    });
-};
-
-exports.addLogJson = function(req, res) {
-    addLog(req, res, false);
-};
-
-exports.addLogView = function(req, res) {
-    addLog(req, res, true);
-};
-
-addLog = function(req, res, isRendered) {
-    var baby = res.baby;
-    baby.dailyLogs.push({ date: req.body.logDate });
-
-    baby.save(function(err) {
+    babyModel.findById(babyId, function(err, baby) {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)

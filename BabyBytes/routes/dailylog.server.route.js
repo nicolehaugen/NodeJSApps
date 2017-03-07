@@ -4,6 +4,6 @@ var dailyLogs = require('../controllers/dailylog.server.controller');
 
 router.get('/', dailyLogs.list);
 
-router.post('/', dailyLogs.create);
+//router.post('/', dailyLogs.create);
 
 module.exports = router;
